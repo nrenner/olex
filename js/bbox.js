@@ -160,9 +160,7 @@ var bbox = (function() {
                 bboxLayer.drawFeature(feature);
             }
         });
-        // allow map panning on hovered feature
-        select.handlers['feature'].stopDown = false;
-        select.handlers['feature'].stopUp = false;
+
         map.addControl(select);
         select.activate();
     }
