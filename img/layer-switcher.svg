@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="layer-switcher.css" type="text/css"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="layer_switcher"
+    width="60" height="60" viewBox="0 0 60 60" overflow="visible" xml:space="preserve">
+    <g id="g_layers" style="stroke:#000; stroke-width:2.5; fill:#fff; shape-rendering: geometricPrecision;">
+        <polygon points="30,23 5,39 30,55 55,39" id="layer_bottom" />
+        <polygon points="30,14 5,30 30,46 55,30" id="layer_middle" />
+        <polygon points="30,5 5,21 30,37 55,21" id="layer_top" />
+    </g>
+</svg>

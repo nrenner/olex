@@ -1,0 +1,7 @@
+polygon {
+    stroke-width: 2.5 !important;
+    stroke: black !important;
+    fill: white !important;
+    /* auto | optimizeSpeed | crispEdges | geometricPrecision */
+    shape-rendering: geometricPrecision;
+}
