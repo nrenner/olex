@@ -154,6 +154,8 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
             this.layer.events.triggerEvent("loadend");
         }
         this.layer.events.triggerEvent("loadstart");*/
+        
+        this.numLoadingTiles++;
 
         var url = OpenLayers.String.format(this.layer.protocol.url, {x: x, y:y, z:z});
         this.response = this.layer.protocol.read({
@@ -171,6 +173,8 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
     update: function() {
         var bounds = this.layer.map.getExtent();
         if (bounds == null) return;
+
+        this.layer.events.triggerEvent("loadstart");
 
         // Find tiles to load
         var map = this.layer.map
@@ -240,6 +244,8 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
      *      by the protocol.
      */
     merge: function(resp, options) {
+        this.numLoadingTiles--;
+        console.log('tiles to load: ' + this.numLoadingTiles);
         if (options.z != this.zoom) return; //Zoom has changed while read was active //TODO: Cancel these reads!
         var bounds = options.bounds;
         var features = resp.features;
@@ -253,6 +259,7 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
                 features[i].usage_count = 1;
                 if (geom) {
                     if (update) geom.transform(remote, local);
+
                     if (geom in this.geometryFeatureMap) {
                         var existing_feature = this.geometryFeatureMap[geom];
                         existing_feature.usage_count += 1;
@@ -269,6 +276,9 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
         this.response = null;
         //TODO: Trigger after last tile
         //this.layer.events.triggerEvent("loadend");
+        if (this.numLoadingTiles === 0) {
+            this.layer.events.triggerEvent("loadend");
+        }
     },
                                             
     CLASS_NAME: "OpenLayers.Strategy.Grid"
