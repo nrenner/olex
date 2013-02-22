@@ -116,7 +116,7 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
             var numNodes = ways[i].refs.length;
             var point_list = new Array(numNodes);
             
-            timer.start("PBF ways.refs");
+            //timer.start("PBF ways.refs");
             for (var j = 0; j < numNodes; j++) {
                var nodeId = ways[i].refs[j];
                var node = nodes[nodeId];
@@ -131,8 +131,8 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
                // elements.
                node.used = true; 
             }
-            timer.stop("PBF ways.refs");
-            timer.start("PBF ways geometry");
+            //timer.stop("PBF ways.refs");
+            //timer.start("PBF ways geometry");
             var geometry = null;
             var poly = this.isWayArea(ways[i]) ? 1 : 0; 
             if (poly) { 
@@ -141,22 +141,22 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
             } else {    
                 geometry = new OpenLayers.Geometry.LineString(point_list);
             }
-            timer.stop("PBF ways geometry");
-            timer.start("PBF ways transform");
+            //timer.stop("PBF ways geometry");
+            //timer.start("PBF ways transform");
             if (this.internalProjection && this.externalProjection) {
                 geometry.transform(this.externalProjection, 
                     this.internalProjection);
             }        
-            timer.stop("PBF ways transform");
-            timer.start("PBF ways Vector");
+            //timer.stop("PBF ways transform");
+            //timer.start("PBF ways Vector");
             var feat = new OpenLayers.Feature.Vector(geometry,
                 ways[i].keysvals);
-            timer.stop("PBF ways Vector");
-            timer.start("PBF ways Vector props");
+            //timer.stop("PBF ways Vector");
+            //timer.start("PBF ways Vector props");
             feat.osm_id = ways[i].id;
             feat.fid = "way." + feat.osm_id;
             feat_list[i] = feat;
-            timer.stop("PBF ways Vector props");
+            //timer.stop("PBF ways Vector props");
         }         
 //        console.timeEnd("PBF ways");
         console.time("PBF nodes");
