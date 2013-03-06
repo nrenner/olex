@@ -177,11 +177,14 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
         this.layer.events.triggerEvent("loadstart");
 
         // Find tiles to load
-        var map = this.layer.map
-        var resolution = map.getResolution();
+        var map = this.layer.map;
+        // TODO temporary hack to support Mapsplit with fix zoom level 13
+        //var resolution = map.getResolution();
+        var resolution = 19.109257068634033;
+        //var curZoom = map.zoom;
+        var curZoom = 13;
         var tileSize = map.getTileSize();
-        var curZoom = map.zoom
-        var extent = this.layer.maxExtent
+        var extent = this.layer.maxExtent;
         var tilelon = resolution * tileSize.w;
         var tilelat = resolution * tileSize.h;
 
@@ -196,7 +199,7 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
             this.geometryFeatureMap = {};
             this.tiles = {};
 //             this.loadedBounds = null;
-            this.zoom = curZoom
+            this.zoom = curZoom;
         }
 
         for (var x=left; x<right; x++) {
