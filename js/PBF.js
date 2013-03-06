@@ -98,13 +98,13 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
         var fileblockfile = new Html5BlockFile(buffer);
         var pbffile = new Html5PBFFile(fileblockfile);
 
-        console.time("PBF.getEntities");
+        //console.time("PBF.getEntities");
 //        console.profile('PBF.getEntities');
         var entities = this.getEntities(pbffile);
 //        console.profileEnd();
         var nodes = entities.nodes;
         var ways = entities.ways;
-        console.timeEnd("PBF.getEntities");
+        //console.timeEnd("PBF.getEntities");
 
         // Geoms will contain at least ways.length entries.
         var feat_list = new Array(ways.length);
@@ -159,7 +159,7 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
             //timer.stop("PBF ways Vector props");
         }         
 //        console.timeEnd("PBF ways");
-        console.time("PBF nodes");
+        //console.time("PBF nodes");
         for (var node_id in nodes) {
             var node = nodes[node_id];
             if (!node.used || this.checkTags) {
@@ -187,7 +187,7 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
                 feat_list.push(feat);
             }   
         }        
-        console.timeEnd("PBF nodes");
+        //console.timeEnd("PBF nodes");
         return feat_list;
     },
 
