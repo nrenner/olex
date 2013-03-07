@@ -114,22 +114,26 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
             // We know the minimal of this one ahead of time. (Could be -1
             // due to areas/polygons)
             var numNodes = ways[i].refs.length;
-            var point_list = new Array(numNodes);
+            var point_list = [];
             
             //timer.start("PBF ways.refs");
             for (var j = 0; j < numNodes; j++) {
                var nodeId = ways[i].refs[j];
                var node = nodes[nodeId];
                
-               var point = new OpenLayers.Geometry.PbfPoint(node.lon, node.lat);
-               
-               // Since OSM is topological, we stash the node ID internally. 
-               point.osm_id = nodeId;
-               point_list[j] = point;
-               
-               // We don't display nodes if they're used inside other 
-               // elements.
-               node.used = true; 
+               if (node) {
+                   var point = new OpenLayers.Geometry.PbfPoint(node.lon, node.lat);
+                   
+                   // Since OSM is topological, we stash the node ID internally. 
+                   point.osm_id = nodeId;
+                   point_list.push(point);
+                   
+                   // We don't display nodes if they're used inside other 
+                   // elements.
+                   node.used = true;
+               } else {
+                   console.warn('node ref not found: way=' + ways[i].id + ', ref=' + nodeId);
+               }
             }
             //timer.stop("PBF ways.refs");
             //timer.start("PBF ways geometry");
