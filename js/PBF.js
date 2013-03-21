@@ -106,8 +106,7 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
         var ways = entities.ways;
         //console.timeEnd("PBF.getEntities");
 
-        // Geoms will contain at least ways.length entries.
-        var feat_list = new Array(ways.length);
+        var feat_list = [];
 
 //        console.time("PBF ways");
         for (var i = 0; i < ways.length; i++) {
@@ -132,9 +131,15 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
                    // elements.
                    node.used = true;
                } else {
-                   console.warn('node ref not found: way=' + ways[i].id + ', ref=' + nodeId);
+                   //console.warn('node ref not found: way=' + ways[i].id + ', ref=' + nodeId);
                }
             }
+            // discard incomplete ways
+            if (point_list.length < numNodes) {
+                //console.warn('discarding way ' + ways[i].id + ' because of missing nodes (' + point_list.length + '/' + numNodes + ')');
+                continue;
+            }
+            
             //timer.stop("PBF ways.refs");
             //timer.start("PBF ways geometry");
             var geometry = null;
@@ -159,7 +164,7 @@ OpenLayers.Format.PBF = OpenLayers.Class(OpenLayers.Format.OSM, { //OpenLayers.F
             //timer.start("PBF ways Vector props");
             feat.osm_id = ways[i].id;
             feat.fid = "way." + feat.osm_id;
-            feat_list[i] = feat;
+            feat_list.push(feat);
             //timer.stop("PBF ways Vector props");
         }         
 //        console.timeEnd("PBF ways");
