@@ -248,7 +248,6 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
      */
     merge: function(resp, options) {
         this.numLoadingTiles--;
-        console.log('tiles to load: ' + this.numLoadingTiles);
         if (options.z != this.zoom) return; //Zoom has changed while read was active //TODO: Cancel these reads!
         var bounds = options.bounds;
         var features = resp.features;
@@ -277,8 +276,7 @@ OpenLayers.Strategy.Grid = OpenLayers.Class(OpenLayers.Strategy, {
             this.layer.addFeatures(filtered);
         }
         this.response = null;
-        //TODO: Trigger after last tile
-        //this.layer.events.triggerEvent("loadend");
+        console.log(OpenLayers.String.format('loaded ${z}/${x}/${y}', options) + ', tiles to load: ' + this.numLoadingTiles);
         if (this.numLoadingTiles === 0) {
             this.layer.events.triggerEvent("loadend");
         }
