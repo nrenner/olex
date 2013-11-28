@@ -17,4 +17,9 @@ cat OSMMeta.js \
     bbox.js \
     Request-patch.js \
     > ../dist/olex.js
+cat distHeader.js \
+    LayerSwitcherBorder.js \
+    HoverAndSelectFeature.js \
+    bbox.js \
+    > ../dist/olex-bbox.js
 cd ..

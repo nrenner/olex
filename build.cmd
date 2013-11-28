@@ -15,4 +15,9 @@ type OSMMeta.js ^
  bbox.js ^
  Request-patch.js ^
  > ../dist/olex.js
+type distHeader.js ^
+ LayerSwitcherBorder.js ^
+ HoverAndSelectFeature.js ^
+ bbox.js ^
+ > ../dist/olex-bbox.js
 cd ..
