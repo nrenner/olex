@@ -1,11 +1,19 @@
-# olex - My OpenLayers extensions
+# olex - my OpenLayers 2.x EXtensions
 
-Extensions to OpenLayers for my own projects, maybe also useful to others once more mature.
+Extensions to OpenLayers 2.x for my own projects, maybe also useful to others once more mature.
 
-*work in progress*
+## Status
+
+Alpha, but stopped developing with OpenLayers 2.x.
+
+## Usages
+
+* [achavi](https://github.com/nrenner/achavi) - Augmented OSM Change Viewer
+* [bbox tool](https://github.com/nrenner/bbox-tool)
 
 ## License
 
-TBD
+Copyright (c) 2012-2013, Norbert Renner. All rights reserved. [2-clause BSD License](LICENSE)
 
-Parts derived from [OpenLayers](http://www.openlayers.org/), Copyright (c) 2005-2012 OpenLayers Contributors. See licences/licence.txt and authors.txt for more details.
+Portions derived from OpenLayers code and examples:
+Copyright 2005-2012 OpenLayers [Contributors](licences/openlayers-authors.txt). All rights reserved. [2-clause BSD License](LICENSE)
