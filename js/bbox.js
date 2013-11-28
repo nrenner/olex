@@ -14,11 +14,15 @@ var bbox = (function() {
             fillOpacity : 0.1,
             strokeWidth : 2,
             strokeColor : "#333",
-            strokeDashstyle : "solid"
+            strokeDashstyle : "solid",
+            // reset to avoid overriding DragFeature classes
+            cursor: ""
         },
         "select" : {
             fillOpacity : 0.2,
             strokeWidth : 2.5,
+            // pointer cursor on hover
+            cursor: "pointer"
         },
         "temporary" : {
             fillColor : "#FFD119",
@@ -170,17 +174,17 @@ var bbox = (function() {
         return roundAndTransform(feature.geometry.getBounds());
     }
 
-    function roundAndTransform(aBounds) {
-        var bounds = aBounds.clone().transform(map.getProjectionObject(), map.displayProjection);
-        
+    // custom float.toFixed function that rounds to integer when .0
+    // see OpenLayers.Bounds.toBBOX
+    function toFixed(num) {
         var decimals = Math.floor(map.getZoom() / 3);
         var multiplier = Math.pow(10, decimals);
 
-        // custom float.toFixed function that rounds to integer when .0
-        // see OpenLayers.Bounds.toBBOX
-        var toFixed = function(num) {
-            return Math.round(num * multiplier) / multiplier;
-        };
+        return Math.round(num * multiplier) / multiplier;
+    };
+
+    function roundAndTransform(aBounds) {
+        var bounds = aBounds.clone().transform(map.getProjectionObject(), map.displayProjection);
 
         // (left, bottom, right, top)
         var box = new OpenLayers.Bounds(
@@ -205,6 +209,7 @@ var bbox = (function() {
         createStyleMap : createStyleMap,
         addControls : addControls,
         switchActive : switchActive,
-        addBBoxFromViewPort : addBBoxFromViewPort
+        addBBoxFromViewPort : addBBoxFromViewPort,
+        toFixed: toFixed
     };
 })();
